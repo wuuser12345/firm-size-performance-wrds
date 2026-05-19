@@ -1,6 +1,6 @@
 # SME Internationalization and Firm Performance
 
-### ExInt II | WU Vienna | SS 2026 | [Your Name]
+### Research Note Project | SS 2026 Dilara
 
 ## Research Question
 
