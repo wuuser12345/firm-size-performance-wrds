@@ -1,6 +1,6 @@
 # Firm Size and Firm Performance
 
-### Research Note Project | SS 2026 Dilara
+### Research Note Project | SS 2026
 
 ## Research Question
 
@@ -8,9 +8,11 @@ Does firm size have a positive linear relationship with firm performance among E
 
 ## Theoretical Background
 
-The hypothesis is based on the resource-based view of the firm and arguments related to economies of scale. Larger firms usually have access to more financial, organizational and managerial resources. These resources can help firms operate more efficiently, invest in productive assets and spread fixed costs over a larger output base. Therefore, firm size may be associated with better firm performance.
+The hypothesis is based on the resource-based view of the firm and the concept of economies of scale. According to the resource-based view, firms differ in their access to valuable resources and capabilities. These resources can influence a firm's competitive advantage and, therefore, its performance. Larger firms often have access to more financial, organizational and managerial resources. This may allow them to operate more efficiently, invest in productive assets, attract qualified employees and absorb market fluctuations more easily.
 
-At the same time, firm size is not automatically beneficial, because larger firms may also face higher coordination costs and more complex organizational structures. However, for this research note, the focus is on testing the simple linear expectation that larger firms perform better.
+In addition, economies of scale suggest that larger firms can spread fixed costs over a larger output base. As a result, larger firms may achieve lower average costs and higher profitability. Based on this theoretical reasoning, firm size is expected to be positively associated with firm performance.
+
+This relationship can be empirically tested using firm-level data from WRDS / Compustat Global. Compustat provides standardized accounting data for publicly listed firms, which makes it suitable for measuring firm size and firm performance across firms and years. In this research note, firm size is measured using total assets, while firm performance is measured using return on assets.
 
 ## Hypothesis
 
@@ -18,14 +20,57 @@ At the same time, firm size is not automatically beneficial, because larger firm
 
 ## Data
 
-The analysis uses firm-level data from WRDS / Compustat Global. Firm performance is measured as return on assets (ROA), calculated as net income divided by total assets (NI / AT). Firm size is measured as the logarithm of total assets, log(AT).
+The analysis uses firm-level data from WRDS / Compustat Global. The unit of analysis is the firm-year.
+
+Firm performance is measured as return on assets (ROA), calculated as:
+
+ROA = Net Income / Total Assets
+
+In Compustat terms:
+
+ROA = NI / AT
+
+Firm size is measured as the logarithm of total assets:
+
+Firm Size = log(AT)
+
+Where:
+
+- NI = Net Income
+- AT = Total Assets
 
 ## Empirical Strategy
 
-The hypothesis will be tested using a simple linear regression model in Python:
+The hypothesis will be tested using a simple linear regression model in Python. The dependent variable is firm performance, measured as ROA. The independent variable is firm size, measured as the logarithm of total assets.
+
+The basic regression model is:
 
 ROA = beta0 + beta1 Firm Size + error
 
+The expected sign of beta1 is positive. This means that larger firms are expected to show higher firm performance.
+
 ## Project Structure
 
-The project follows a reproducible research setup with separate folders for raw data, processed data, code, output, references and the final research note.
+The project follows a reproducible research setup. The folder structure separates raw data, processed data, code, output files, references and project documentation.
+
+```text
+firm-size-performance-wrds/
+├── code/
+│   ├── 01_pull_data.py
+│   ├── 02_clean.py
+│   ├── 03_descriptives.py
+│   └── 04_regression.py
+├── data/
+│   ├── raw/
+│   └── processed/
+├── output/
+│   ├── tables/
+│   └── figures/
+├── references/
+│   └── library.bib
+├── README.md
+├── Taskfile.yml
+├── pyproject.toml
+├── requirements.txt
+├── .env.example
+└── .gitignore
