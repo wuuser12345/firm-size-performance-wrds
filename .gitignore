@@ -1,6 +1,8 @@
 .venv/
 data/raw/
+data/processed/
 .env
+*.parquet
 references/*.pdf
 __pycache__/
 *.pyc
