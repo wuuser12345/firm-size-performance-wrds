@@ -62,7 +62,7 @@ The hypothesis will be tested using a simple linear regression model in Python. 
 
 The basic regression model is:
 
-ROA = beta0 + beta1 Firm Size + error
+ROA = beta0 + beta1 Firm Size + beta2 Leverage + Industry Controls + error
 
 The expected sign of beta1 is positive. This means that larger firms are expected to show higher firm performance.
 
