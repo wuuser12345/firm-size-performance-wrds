@@ -24,11 +24,7 @@ The analysis uses firm-level data from WRDS / Compustat Global. The unit of anal
 
 Firm performance is measured as return on assets (ROA), calculated as:
 
-ROA = Net Income / Total Assets
-
-In Compustat terms:
-
-ROA = NI / AT
+ROA = NICON / AT
 
 Firm size is measured as the logarithm of total assets:
 
@@ -36,7 +32,7 @@ Firm Size = log(AT)
 
 Where:
 
-- NI = Net Income
+- NICON = Net Income (Loss) - Consolidated
 - AT = Total Assets
 
 ## Variables
@@ -45,7 +41,7 @@ Where:
 
 | Construct | Data Item(s) | Formula |
 |-----------|--------------|---------|
-| Firm performance (ROA) | NI, AT | NI / AT |
+| Firm performance (ROA) | NICON, AT | NICON / AT |
 
 ### Independent variable (X)
 
@@ -58,7 +54,6 @@ Where:
 | Construct | Data Item(s) | Formula |
 |-----------|--------------|---------|
 | Leverage | DLTT, DLC, SEQ | (DLTT + DLC) / SEQ |
-| Firm age | FYEAR, INCO | FYEAR - INCO |
 | Industry | SIC or NAICS | categorical control |
 
 ## Empirical Strategy
