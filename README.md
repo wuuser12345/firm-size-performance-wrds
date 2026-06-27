@@ -1,6 +1,6 @@
 # Firm Size and Firm Performance among European Manufacturing SMEs
 
-### Research Note Project | SS 2026
+### Research Note Project | Dilara Dogancay | ExInt II | WU Vienna | SS 2026
 
 ## Research Question
 
