@@ -63,8 +63,6 @@ else:
 
 # Introduction
 
-# Introduction
-
 Small and medium-sized enterprises are a central part of the European business economy. They contribute to employment, regional development, innovation and competitiveness, while also operating under more limited financial, managerial and organizational resources than larger firms [@european_commission_sme_2026; @oecd_small_2017]. This tension makes SMEs an especially relevant setting for studying firm performance. On the one hand, SMEs are often praised for flexibility and adaptability. On the other hand, they may face constraints in financing, production capacity, managerial specialization and access to external resources. As a result, performance differences among SMEs may depend not only on entrepreneurial effort or market conditions, but also on the scale of resources available inside the firm.
 
 The question is therefore not simply whether SMEs matter for the European economy, but whether differences within the SME category are economically meaningful. This distinction is important because SMEs are often treated as a relatively homogeneous group, even though they may differ substantially in their asset base, organizational capacity and ability to exploit scale-related efficiencies. In manufacturing, these differences may be particularly relevant. Manufacturing firms often depend on fixed assets, machinery, technical know-how, production routines and the efficient use of capacity. Compared with service-based firms, manufacturing SMEs may therefore face stronger scale-related advantages and constraints.

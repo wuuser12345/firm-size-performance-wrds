@@ -10,3 +10,5 @@ __pycache__/
 *.tex
 .DS_Store
 .ipynb_checkpoints/
+output/
+research_note.pdf
