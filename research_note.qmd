@@ -1,9 +1,9 @@
 ---
 title: "Firm Size and Firm Performance among European Manufacturing SMEs"
 subtitle: "A Firm-Level Analysis Using WRDS / Compustat Global Data"
-author: |
-  Dilara | ExInt II | WU Vienna | SS 2026
-  https://github.com/wuuser12345/firm-size-performance-wrds
+author:
+  - "Dilara Dogancay | ExInt II | WU Vienna | SS 2026"
+  - "https://github.com/wuuser12345/firm-size-performance-wrds"
 date: "June 2026"
 bibliography: references/library.bib
 csl: references/apa.csl
@@ -43,17 +43,17 @@ main_result = results[
     (results["variable"] == "firm_size")
 ].iloc[0]
 
-beta_size = round(main_result["coef"], 4)
-p_size = round(main_result["p_value"], 4)
-r2_main = round(main_result["r_squared"], 4)
+beta_size = float(round(main_result["coef"], 4))
+p_size = float(round(main_result["p_value"], 4))
+r2_main = float(round(main_result["r_squared"], 4))
 
 lev_result = results[
     (results["model"] == main_model) &
     (results["variable"] == "leverage")
 ].iloc[0]
 
-beta_lev = round(lev_result["coef"], 4)
-p_lev = round(lev_result["p_value"], 4)
+beta_lev = float(round(lev_result["coef"], 4))
+p_lev = float(round(lev_result["p_value"], 4))
 
 if beta_size > 0 and p_size < 0.10:
     h1_result = "SUPPORTED"
@@ -63,47 +63,59 @@ else:
 
 # Introduction
 
-Small and medium-sized enterprises are an important part of the European economy. They contribute to employment, innovation, regional economic development and competitiveness. At the same time, SMEs often operate with more limited financial, managerial and organizational resources than larger firms. Therefore, firm size may matter for how efficiently firms can use their resources and how well they perform.
+# Introduction
 
-Prior research often argues that larger firms may benefit from stronger resource endowments and economies of scale. However, the relationship between firm size and firm performance may differ across firm types and sectors. This research note focuses specifically on European manufacturing SMEs. This context is relevant because manufacturing firms often require physical assets, production capacity and operational efficiency, which may make firm size especially important.
+Small and medium-sized enterprises are a central part of the European business economy. They contribute to employment, regional development, innovation and competitiveness, while also operating under more limited financial, managerial and organizational resources than larger firms [@european_commission_sme_2026; @oecd_small_2017]. This tension makes SMEs an especially relevant setting for studying firm performance. On the one hand, SMEs are often praised for flexibility and adaptability. On the other hand, they may face constraints in financing, production capacity, managerial specialization and access to external resources. As a result, performance differences among SMEs may depend not only on entrepreneurial effort or market conditions, but also on the scale of resources available inside the firm.
 
-This research note examines whether larger European manufacturing SMEs show higher accounting performance. The analysis uses firm-level data from WRDS / Compustat Global for the period from `{python} start_year` to `{python} end_year`. Firm performance is measured as return on assets, and firm size is measured as the logarithm of total assets.
+The question is therefore not simply whether SMEs matter for the European economy, but whether differences within the SME category are economically meaningful. This distinction is important because SMEs are often treated as a relatively homogeneous group, even though they may differ substantially in their asset base, organizational capacity and ability to exploit scale-related efficiencies. In manufacturing, these differences may be particularly relevant. Manufacturing firms often depend on fixed assets, machinery, technical know-how, production routines and the efficient use of capacity. Compared with service-based firms, manufacturing SMEs may therefore face stronger scale-related advantages and constraints.
+
+Existing research suggests that firm size can matter for profitability, but the relationship between size and performance is not necessarily identical across all firms and sectors [@gaio_are_2018]. A broad comparison between large firms and SMEs is useful, but it does not fully answer whether size differences also matter within the SME segment itself. This gap is relevant because the SME category includes firms with very different levels of assets and operational capacity. A small manufacturing SME close to the lower end of the asset distribution may face very different production and financing conditions than a medium-sized SME operating closer to the European Commission's SME threshold.
+
+This research note addresses this gap by examining whether firm size is positively associated with accounting performance among European manufacturing SMEs. The analysis uses firm-level data from WRDS / Compustat Global for the period from `{python} start_year` to `{python} end_year`. Firm performance is measured as return on assets, while firm size is measured as the logarithm of total assets. The empirical analysis compares three regression models with increasing controls: a baseline OLS model, a model including leverage, and a model including leverage and industry controls. The main finding is that firm size is positively and statistically significantly associated with ROA, suggesting that size-related resources and operational scale are relevant even within the SME category.
 
 > **Research question:** Does firm size have a positive linear relationship with firm performance among European manufacturing SMEs?
 
 # Theory and Hypothesis
 
-The hypothesis is based on the resource-based view of the firm and the concept of economies of scale. The resource-based view argues that firms differ in their access to valuable resources and capabilities. Firms with stronger resources may be better able to build competitive advantage and achieve higher performance.
+The theoretical argument builds on the resource-based view of the firm and the logic of economies of scale. The resource-based view argues that firms differ in their access to valuable, rare and difficult-to-imitate resources, and that these differences can explain why some firms achieve stronger performance than others [@barney_firm_1991]. From this perspective, firm size is not merely a descriptive characteristic. It can also serve as an indicator of the resources, capabilities and organizational capacity available to a firm.
 
-Firm size can be interpreted as an indicator of resource availability. Larger firms may have more financial, organizational and managerial resources. They may also have better access to external finance, more stable supplier relationships and more capacity to absorb external shocks. In the manufacturing sector, size may additionally matter because production often requires fixed assets, technical capabilities and process efficiency.
+This argument is especially relevant for SMEs. Smaller firms often operate with limited financial slack, narrower managerial structures and fewer specialized functions. Larger SMEs, by contrast, may have more developed internal routines, better access to financing, greater bargaining power with suppliers and more capacity to invest in equipment or process improvements. These differences are important because performance depends not only on market opportunities, but also on whether firms possess the resources needed to exploit those opportunities. In this sense, firm size may capture an important part of the internal resource base that allows SMEs to convert opportunities into accounting performance.
 
-Economies of scale provide a second mechanism. Larger firms can spread fixed costs over a larger activity base. This can reduce average costs and improve profitability. Therefore, larger manufacturing SMEs are expected to achieve higher return on assets than smaller manufacturing SMEs.
+The manufacturing context strengthens this theoretical mechanism. Manufacturing firms often require fixed assets, machinery, technical knowledge, production planning and efficient capacity utilization. Larger manufacturing SMEs may be better positioned to invest in productive assets, standardize processes, attract skilled employees and absorb temporary demand shocks. They may also be able to spread fixed costs across a larger activity base. This is the logic of economies of scale: when fixed costs are distributed over more output or broader operations, average costs may fall and profitability may improve. Therefore, size-related advantages should be particularly visible in sectors where production capacity and asset intensity matter.
 
-> **H1:** Firm size is positively associated with firm performance among European manufacturing SMEs.  
+Empirical evidence also suggests that profitability differs systematically between SMEs and larger firms in the European Union [@gaio_are_2018]. While this does not automatically imply that every larger SME performs better than every smaller SME, it supports the broader idea that firm size is a meaningful dimension in performance analysis. For European manufacturing SMEs, the expected relationship is therefore positive: larger firms should, on average, show stronger return on assets because they possess greater resources, more operational capacity and stronger potential to exploit scale-related efficiencies.
+
+At the same time, this relationship is not assumed to be causal in a strict sense. Firm size may be associated with performance because larger firms possess more resources, but high-performing firms may also grow larger over time. The purpose of this research note is therefore not to prove a causal effect of size, but to test whether the predicted positive association is visible in the available firm-year data. This is consistent with the exploratory scope of the research note and with the objective of documenting whether the theoretical mechanism is reflected in the empirical pattern.
+
+> **H1:** Firm size is positively associated with firm performance among European manufacturing SMEs.
 > *(Test: the expected sign of the firm size coefficient is positive.)*
 
 # Data and Method
 
-The analysis uses firm-level data from WRDS / Compustat Global. The unit of analysis is the firm-year. The final sample comprises `{python} f"{n_obs:,}"` firm-year observations from `{python} f"{n_firms:,}"` unique firms. The sample covers the fiscal years `{python} start_year` to `{python} end_year`.
+The analysis uses firm-level accounting data from WRDS / Compustat Global. The unit of analysis is the firm-year, meaning that each observation represents one firm in one fiscal year. The final sample comprises `{python} f"{n_obs:,}"` firm-year observations from `{python} f"{n_firms:,}"` unique firms. The sample covers the fiscal years `{python} start_year` to `{python} end_year`.
 
-The sample focuses on European manufacturing SMEs. SMEs are identified using a total assets threshold of `AT <= 43` million. Manufacturing firms are identified using NAICS codes starting with 31, 32 or 33. Observations with non-positive total assets or non-positive stockholders' equity are excluded.
+The sample is restricted to European manufacturing SMEs. This restriction is important for both theoretical and empirical reasons. Theoretically, manufacturing firms are expected to be more sensitive to size-related resource advantages because production often requires fixed assets, machinery, technical capabilities and efficient capacity utilization. Empirically, focusing on one broad sector reduces heterogeneity compared with a sample that combines manufacturing, services, finance and other industries.
 
-Firm performance is measured using return on assets. Firm size is measured using the natural logarithm of total assets. Leverage is included as a control variable to account for differences in capital structure. Industry controls are included using NAICS codes.
+SMEs are identified using a total assets threshold of `AT <= 43` million. This follows the European Commission's balance sheet threshold for medium-sized enterprises [@european_commission_sme_nodate]. Firms with total assets below or equal to this threshold are retained, while observations with non-positive total assets are excluded. In addition, observations with non-positive stockholders' equity are removed because leverage is calculated using stockholders' equity in the denominator. Manufacturing firms are identified using NAICS codes starting with 31, 32 or 33. The analysis therefore focuses on firms that are both within the European SME size range and active in manufacturing industries.
 
-| Construct | Role | Data item(s) | Formula |
-|---|---|---|---|
-| Firm performance | Dependent variable | NICON, AT | NICON / AT |
-| Firm size | Independent variable | AT | log(AT) |
-| Leverage | Control variable | DLTT, DLC, SEQ | (DLTT + DLC) / SEQ |
-| Industry | Control variable | NAICS | categorical control |
+Firm performance is measured using return on assets, calculated as net income divided by total assets. ROA is a suitable accounting-based performance measure because it relates earnings to the asset base used to generate them. This is particularly relevant in manufacturing, where assets and production capacity are central to the business model. Firm size is measured as the natural logarithm of total assets. The logarithmic transformation reduces skewness and allows the analysis to compare proportional rather than purely absolute differences in firm size.
 
-The main regression model is:
+Leverage is included as a control variable because capital structure may influence firm performance. Highly leveraged firms may face higher financial pressure, while firms with lower leverage may have greater financial flexibility. Industry controls are included in the most complete model to account for systematic differences across manufacturing industries. This is important because manufacturing is not a single homogeneous sector; firms in food production, machinery, chemicals or electronics may differ in asset intensity, margins and capital requirements.
+
+| Construct        | Role                 | Data item(s)   | Formula             |
+| ---------------- | -------------------- | -------------- | ------------------- |
+| Firm performance | Dependent variable   | NICON, AT      | NICON / AT          |
+| Firm size        | Independent variable | AT             | log(AT)             |
+| Leverage         | Control variable     | DLTT, DLC, SEQ | (DLTT + DLC) / SEQ  |
+| Industry         | Control variable     | NAICS          | categorical control |
+
+The empirical analysis is based on three regression models. Model 1 estimates the baseline association between firm size and ROA. Model 2 adds leverage as a financial control. Model 3 adds industry controls and is treated as the most complete specification. The main regression model can be written as:
 
 $$
 ROA_{it} = \beta_0 + \beta_1 FirmSize_{it} + \beta_2 Leverage_{it} + IndustryControls_i + \varepsilon_{it}
 $$
 
-The coefficient of interest is $\beta_1$. H1 is supported if the coefficient on firm size is positive and statistically significant.
+The coefficient of interest is $\beta_1$. H1 is supported if the coefficient on firm size is positive and statistically significant. Because the data are structured as firm-year observations, the results should be interpreted as associations rather than causal effects. Firm-level panel datasets may raise methodological concerns related to repeated observations, unobserved heterogeneity and standard-error estimation [@petersen_estimating_2009]. Therefore, the research design is best understood as an exploratory firm-level analysis rather than a causal identification strategy.
 
 ```{python}
 #| label: tbl-summary
@@ -114,7 +126,13 @@ summary
 
 # Results
 
-The regression results show that firm size is positively associated with ROA. In the most complete model, the coefficient on firm size is `{python} beta_size`, with a p-value of `{python} p_size`. Therefore, H1 is **`{python} h1_result`**.
+The descriptive statistics provide a first overview of the sample. The final dataset contains `{python} f"{n_obs:,}"` firm-year observations from `{python} f"{n_firms:,}"` unique European manufacturing SMEs. The average return on assets is negative, indicating that many firms in the sample report weak accounting performance during the observation period. This is plausible in an SME sample because smaller firms may experience more volatile earnings, thinner margins and stronger sensitivity to economic shocks. At the same time, the distribution of ROA is wide, suggesting substantial heterogeneity in performance across firms and years.
+
+Firm size also varies meaningfully within the SME sample. This is important because the study does not compare SMEs with large multinational corporations. Instead, it examines whether differences inside the SME category are associated with differences in performance. The variation in total assets and logged firm size therefore provides the empirical basis for testing H1. Leverage also shows considerable dispersion, which supports its inclusion as a control variable. Since capital structure may affect profitability and risk, controlling for leverage helps isolate the association between firm size and ROA more clearly.
+
+The regression results show a consistent positive association between firm size and ROA. In Model 1, the baseline OLS model, the coefficient on firm size is positive and statistically significant. This means that larger firms in the sample tend to report higher ROA than smaller firms. Model 2 adds leverage as a financial control. The coefficient on firm size remains positive and statistically significant, suggesting that the size-performance relationship is not simply driven by differences in leverage.
+
+Model 3 adds industry controls and is the most complete specification. In this model, the coefficient on firm size is `{python} beta_size`, with a p-value of `{python} p_size`. Therefore, H1 is **`{python} h1_result`**. Substantively, this result means that size differences within the European manufacturing SME segment are economically meaningful. Larger SMEs appear to have performance advantages that are consistent with stronger resource endowments, greater operational capacity and scale-related efficiencies.
 
 ```{python}
 #| label: tbl-regression
@@ -129,26 +147,49 @@ reg_table["r_squared"] = reg_table["r_squared"].round(4)
 reg_table
 ```
 
-The result suggests that larger SMEs in the European manufacturing sector tend to show higher accounting performance. In practical terms, this means that firms with higher total assets are associated with higher return on assets in this sample. This finding is consistent with the expectation that larger SMEs may benefit from stronger resources, greater operational capacity and economies of scale.
+The leverage coefficient is small in all models. In the most complete model, the coefficient on leverage is `{python} beta_lev`, with a p-value of `{python} p_lev`. This suggests that leverage has a weaker and less stable relationship with ROA than firm size. While leverage may matter for financial risk and capital structure, it does not appear to explain the main performance pattern in this sample. The central result is therefore driven primarily by firm size.
 
-Leverage has a smaller effect than firm size. In the most complete model, the coefficient on leverage is `{python} beta_lev`, with a p-value of `{python} p_lev`. This suggests that the main finding is primarily driven by firm size rather than leverage.
+The increase in explanatory power from the baseline model to the industry-control model also matters. The inclusion of industry controls increases the model's ability to account for variation in ROA, which is expected in manufacturing because subsectors differ in asset intensity, production processes and margins. However, the firm-size coefficient remains positive even after these controls are included. This strengthens the interpretation that the positive association between size and performance is not merely a reflection of broad industry differences.
+
+Figure 1 visualizes the main relationship between firm size and ROA. The fitted line slopes upward, which is consistent with the positive regression coefficient. The figure also shows substantial dispersion around the fitted line. This dispersion is important because it reminds us that firm size is not the only determinant of performance. Some smaller SMEs perform well, and some larger SMEs perform poorly. Nevertheless, the average pattern supports the theoretical expectation that larger manufacturing SMEs tend to achieve higher accounting performance.
 
 ![Relationship between firm size and ROA.](output/figures/main_relationship.png){width=90%}
 
+Figure 2 presents the correlation matrix. The correlation pattern is consistent with the regression results because firm size is positively related to ROA, while leverage shows a weaker relationship. The correlation matrix also helps verify that the main variables are connected in the expected direction without suggesting that any single bivariate relationship fully explains performance differences.
+
 ![Correlation matrix.](output/figures/correlation_matrix.png){width=80%}
+
+Figure 3 shows the distribution of ROA. The distribution confirms that accounting performance is uneven across the sample. This unevenness is typical in firm-level data, especially among SMEs, where earnings can vary strongly across firms and years. The distribution also supports the need to interpret the regression results as average associations rather than deterministic effects.
 
 ![Distribution of ROA.](output/figures/dv_distribution.png){width=80%}
 
-# Discussion and Conclusion
+# Discussion
 
-This research note examined whether firm size is positively associated with firm performance among European manufacturing SMEs. The results support H1. Larger firms in the sample show higher return on assets, suggesting that size-related resources and economies of scale may matter for SME performance in manufacturing.
+The results provide support for the theoretical argument that firm size is associated with performance among European manufacturing SMEs. The positive and statistically significant firm-size coefficient suggests that larger SMEs tend to achieve higher return on assets than smaller SMEs. This finding is consistent with the resource-based view of the firm, which argues that performance differences can arise from differences in firm-specific resources and capabilities [@barney_firm_1991]. In the context of this research note, firm size can be interpreted as a proxy for a broader internal resource base.
 
-The finding is consistent with the idea that larger SMEs may have more resources and better operational capacity than smaller SMEs. In manufacturing, this may be especially relevant because production activities often require fixed assets, technical capabilities and process efficiency. The result therefore supports the theoretical argument that firm size can be an important determinant of accounting performance.
+The manufacturing context makes this interpretation especially plausible. Manufacturing SMEs often depend on machinery, fixed assets, technical employees, production routines and efficient capacity utilization. Larger SMEs may therefore have advantages that are not immediately available to smaller firms. They may be better able to invest in equipment, standardize production processes, negotiate with suppliers and absorb temporary shocks in demand or input prices. The positive size-performance relationship is therefore not only a statistical result, but also theoretically meaningful: it suggests that resource depth and operational scale matter even within the SME category.
 
-This research note has two main limitations. First, the analysis is based on accounting data from WRDS / Compustat Global, which mainly covers firms included in available financial databases and may not fully represent all European SMEs. Second, the analysis identifies associations rather than causal effects. Therefore, the results should not be interpreted as proving that firm size directly causes higher performance.
+This is an important point because SMEs are often discussed as one homogeneous group. The results of this research note suggest that this may hide meaningful differences inside the SME segment. A manufacturing SME with a very small asset base may face different constraints than a medium-sized manufacturing SME closer to the European Commission's SME threshold. Both firms may formally belong to the SME category, but their resource base, production capacity and ability to exploit economies of scale may differ substantially.
 
-Future research could extend this analysis by comparing different sectors or by using a panel fixed-effects model to better account for unobserved firm-level heterogeneity. Another useful extension would be to examine whether the relationship between firm size and performance differs across countries or institutional environments.
+The finding also connects to prior empirical work on firm size and profitability in the European Union [@gaio_are_2018]. While this research note does not compare SMEs with large firms directly, it shows that size differences remain relevant within a restricted European manufacturing SME sample. This makes the result more specific: the relationship is not only visible when comparing very small firms with large corporations, but also when focusing on differences among SMEs themselves.
 
-Overall, this research note finds that firm size is positively and statistically significantly associated with firm performance among European manufacturing SMEs.
+A nuanced aspect of the results is that average ROA in the sample is negative, while the firm-size coefficient is positive. This means that the sample includes many firms with weak accounting performance, but larger firms still tend to perform relatively better. The result should therefore not be interpreted as saying that all larger SMEs are profitable. Rather, it suggests that larger SMEs have a relative performance advantage on average. This distinction is important because firm-level data often contain substantial heterogeneity, especially in SME samples.
+
+From a managerial perspective, the results suggest that scale-related resources may matter for manufacturing SMEs. Growth in size may allow firms to invest in production capacity, professionalize internal processes and improve cost efficiency. However, the findings should not be interpreted as a simple recommendation that every SME should grow as quickly as possible. Growth can also create coordination problems, financing needs and organizational complexity. The practical implication is therefore more cautious: manufacturing SMEs may benefit from building the resource base and operational capabilities that typically come with size, rather than pursuing size as an end in itself.
+
+# Conclusion
+
+This research note examined whether firm size has a positive linear relationship with firm performance among European manufacturing SMEs. Using firm-level data from WRDS / Compustat Global for the period from `{python} start_year` to `{python} end_year`, the analysis finds that firm size is positively and statistically significantly associated with return on assets. The research question can therefore be answered affirmatively: larger European manufacturing SMEs tend to show higher accounting performance on average.
+
+The contribution of the research note is twofold. First, it shifts attention from the general importance of SMEs to differences within the SME category. This is relevant because SMEs are not uniform; they differ in resources, asset base, operational capacity and ability to exploit economies of scale. Second, the analysis focuses specifically on manufacturing SMEs, where size-related advantages may be particularly important due to fixed assets, production routines and capacity utilization.
+
+This study has two main limitations. First, the analysis identifies associations rather than causal effects. It cannot fully determine whether larger size leads to better performance, whether better-performing firms grow larger, or whether both are influenced by unobserved firm characteristics. Second, the dataset is based on WRDS / Compustat Global, which may not fully represent all European SMEs. Smaller private firms may be underrepresented, meaning that the results should be interpreted as applying to firms covered by the available database rather than to the entire European SME population.
+
+Future research could extend the analysis by using a stronger panel design with firm fixed effects, year fixed effects and clustered standard errors. This would help account for unobserved firm-level heterogeneity and time-specific shocks, which are important concerns in firm-level panel datasets [@petersen_estimating_2009]. Another extension would be to compare manufacturing subsectors or countries to examine whether the size-performance relationship is stronger in more asset-intensive or institutionally stable environments.
+
+Overall, this research note finds that firm size is a meaningful predictor of accounting performance among European manufacturing SMEs. The results support the idea that size-related resources, operational capacity and scale-related efficiencies can shape performance even within the SME segment.
 
 # References
+
+::: {#refs}
+:::
