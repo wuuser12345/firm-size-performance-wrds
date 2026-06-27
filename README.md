@@ -1,4 +1,4 @@
-# Firm Size and Firm Performance
+# Firm Size and Firm Performance among European Manufacturing SMEs
 
 ### Research Note Project | SS 2026
 
