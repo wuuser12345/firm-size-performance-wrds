@@ -2,8 +2,8 @@
 title: "Firm Size and Firm Performance among European Manufacturing SMEs"
 subtitle: "A Firm-Level Analysis Using WRDS / Compustat Global Data"
 author:
-  - Dilara Dogancay | ExInt II | WU Vienna | SS 2026
-  - https://github.com/wuuser12345/firm-size-performance-wrds
+  - "Dilara Dogancay | ExInt II | WU Vienna | SS 2026"
+  - "https://github.com/wuuser12345/firm-size-performance-wrds"
 author-meta: "Dilara Dogancay"
 title-meta: "Firm Size and Firm Performance among European Manufacturing SMEs"
 date: "June 28, 2026"
@@ -11,11 +11,16 @@ bibliography: references/library.bib
 csl: references/apa.csl
 format:
   pdf:
-    toc: false
+    toc: true
+    toc-title: "Table of Contents"
     number-sections: true
     geometry: margin=2.5cm
     fontsize: 11pt
     linestretch: 1.3
+    include-in-header:
+      text: |
+        \let\oldtableofcontents\tableofcontents
+        \renewcommand{\tableofcontents}{\newpage\oldtableofcontents\newpage}
 execute:
   eval: true
   echo: false
@@ -79,15 +84,15 @@ This research note addresses this gap by examining whether firm size is positive
 
 # Theory and Hypothesis
 
-The theoretical argument builds on the resource-based view of the firm and the logic of economies of scale. The resource-based view argues that firms differ in their access to valuable, rare and difficult-to-imitate resources, and that these differences can explain why some firms achieve stronger performance than others [@barney_firm_1991]. From this perspective, firm size is not merely a descriptive characteristic. It can also serve as an indicator of the resources, capabilities and organizational capacity available to a firm.
+The theoretical argument builds on the resource-based view of the firm and the logic of economies of scale. The resource-based view argues that firms differ in their access to valuable, rare and difficult-to-imitate resources, and that these differences can explain why some firms achieve stronger performance than others. From this perspective, firm size is not merely a descriptive characteristic. It can also serve as an indicator of the resources, capabilities and organizational capacity available to a firm [@barney_firm_1991].
 
-This argument is especially relevant for SMEs. Smaller firms often operate with limited financial slack, narrower managerial structures and fewer specialized functions. Larger SMEs, by contrast, may have more developed internal routines, better access to financing, greater bargaining power with suppliers and more capacity to invest in equipment or process improvements. These differences are important because performance depends not only on market opportunities, but also on whether firms possess the resources needed to exploit those opportunities. In this sense, firm size may capture an important part of the internal resource base that allows SMEs to convert opportunities into accounting performance.
+This argument is especially relevant for SMEs. Smaller firms often operate with limited financial slack, narrower managerial structures and fewer specialized functions. Larger SMEs, by contrast, may have more developed internal routines, better access to financing, greater bargaining power with suppliers and more capacity to invest in equipment or process improvements. These differences are important because performance depends not only on market opportunities, but also on whether firms possess the resources needed to exploit those opportunities. In this sense, firm size may capture an important part of the internal resource base that allows SMEs to convert opportunities into accounting performance [@barney_firm_1991; @oecd_small_2017].
 
-The manufacturing context strengthens this theoretical mechanism. Manufacturing firms often require fixed assets, machinery, technical knowledge, production planning and efficient capacity utilization. Larger manufacturing SMEs may be better positioned to invest in productive assets, standardize processes, attract skilled employees and absorb temporary demand shocks. They may also be able to spread fixed costs across a larger activity base. This is the logic of economies of scale: when fixed costs are distributed over more output or broader operations, average costs may fall and profitability may improve. Therefore, size-related advantages should be particularly visible in sectors where production capacity and asset intensity matter.
+The manufacturing context strengthens this theoretical mechanism. Manufacturing firms often require fixed assets, machinery, technical knowledge, production planning and efficient capacity utilization. Larger manufacturing SMEs may be better positioned to invest in productive assets, standardize processes, attract skilled employees and absorb temporary demand shocks. They may also be able to spread fixed costs across a larger activity base. This is the logic of economies of scale: when fixed costs are distributed over more output or broader operations, average costs may fall and profitability may improve. Therefore, size-related advantages should be particularly visible in sectors where production capacity and asset intensity matter [@oecd_small_2017].
 
-Empirical evidence also suggests that profitability differs systematically between SMEs and larger firms in the European Union [@gaio_are_2018]. While this does not automatically imply that every larger SME performs better than every smaller SME, it supports the broader idea that firm size is a meaningful dimension in performance analysis. For European manufacturing SMEs, the expected relationship is therefore positive: larger firms should, on average, show stronger return on assets because they possess greater resources, more operational capacity and stronger potential to exploit scale-related efficiencies.
+Empirical evidence also suggests that profitability differs systematically between SMEs and larger firms in the European Union. While this does not automatically imply that every larger SME performs better than every smaller SME, it supports the broader idea that firm size is a meaningful dimension in performance analysis. For European manufacturing SMEs, the expected relationship is therefore positive: larger firms should, on average, show stronger return on assets because they possess greater resources, more operational capacity and stronger potential to exploit scale-related efficiencies [@barney_firm_1991; @gaio_are_2018].
 
-At the same time, this relationship is not assumed to be causal in a strict sense. Firm size may be associated with performance because larger firms possess more resources, but high-performing firms may also grow larger over time. The purpose of this research note is therefore not to prove a causal effect of size, but to test whether the predicted positive association is visible in the available firm-year data. This is consistent with the exploratory scope of the research note and with the objective of documenting whether the theoretical mechanism is reflected in the empirical pattern.
+At the same time, this relationship is not assumed to be causal in a strict sense. Firm size may be associated with performance because larger firms possess more resources, but high-performing firms may also grow larger over time. The purpose of this research note is therefore not to prove a causal effect of size, but to test whether the predicted positive association is visible in the available firm-year data. This is consistent with the exploratory scope of the research note and with the objective of documenting whether the theoretical mechanism is reflected in the empirical pattern [@barney_firm_1991; @petersen_estimating_2009].
 
 > **H1:** Firm size is positively associated with firm performance among European manufacturing SMEs.
 > *(Test: the expected sign of the firm size coefficient is positive.)*
@@ -195,3 +200,4 @@ Overall, this research note finds that firm size is a meaningful predictor of ac
 
 ::: {#refs}
 :::
+AI Disclosure: AI tools were used as language-support tools during the preparation of this research note.
