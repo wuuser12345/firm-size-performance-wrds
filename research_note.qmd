@@ -2,9 +2,11 @@
 title: "Firm Size and Firm Performance among European Manufacturing SMEs"
 subtitle: "A Firm-Level Analysis Using WRDS / Compustat Global Data"
 author:
-  - "Dilara Dogancay | ExInt II | WU Vienna | SS 2026"
-  - "https://github.com/wuuser12345/firm-size-performance-wrds"
-date: "June 2026"
+  - Dilara Dogancay | ExInt II | WU Vienna | SS 2026
+  - https://github.com/wuuser12345/firm-size-performance-wrds
+author-meta: "Dilara Dogancay"
+title-meta: "Firm Size and Firm Performance among European Manufacturing SMEs"
+date: "June 28, 2026"
 bibliography: references/library.bib
 csl: references/apa.csl
 format:
