@@ -45,6 +45,7 @@ main_result = results[
 
 beta_size = float(round(main_result["coef"], 4))
 p_size = float(round(main_result["p_value"], 4))
+p_size_text = "< 0.001" if main_result["p_value"] < 0.001 else round(main_result["p_value"], 4)
 r2_main = float(round(main_result["r_squared"], 4))
 
 lev_result = results[
@@ -54,6 +55,7 @@ lev_result = results[
 
 beta_lev = float(round(lev_result["coef"], 4))
 p_lev = float(round(lev_result["p_value"], 4))
+p_lev_text = "< 0.001" if lev_result["p_value"] < 0.001 else round(lev_result["p_value"], 4)
 
 if beta_size > 0 and p_size < 0.10:
     h1_result = "SUPPORTED"
@@ -130,7 +132,7 @@ Firm size also varies meaningfully within the SME sample. This is important beca
 
 The regression results show a consistent positive association between firm size and ROA. In Model 1, the baseline OLS model, the coefficient on firm size is positive and statistically significant. This means that larger firms in the sample tend to report higher ROA than smaller firms. Model 2 adds leverage as a financial control. The coefficient on firm size remains positive and statistically significant, suggesting that the size-performance relationship is not simply driven by differences in leverage.
 
-Model 3 adds industry controls and is the most complete specification. In this model, the coefficient on firm size is `{python} beta_size`, with a p-value of `{python} p_size`. Therefore, H1 is **`{python} h1_result`**. Substantively, this result means that size differences within the European manufacturing SME segment are economically meaningful. Larger SMEs appear to have performance advantages that are consistent with stronger resource endowments, greater operational capacity and scale-related efficiencies.
+Model 3 adds industry controls and is the most complete specification. In this model, the coefficient on firm size is `{python} beta_size`, with a p-value < 0.001. Therefore, H1 is **`{python} h1_result`**. Substantively, this result means that size differences within the European manufacturing SME segment are economically meaningful. Larger SMEs appear to have performance advantages that are consistent with stronger resource endowments, greater operational capacity and scale-related efficiencies.
 
 ```{python}
 #| label: tbl-regression
@@ -145,7 +147,7 @@ reg_table["r_squared"] = reg_table["r_squared"].round(4)
 reg_table
 ```
 
-The leverage coefficient is small in all models. In the most complete model, the coefficient on leverage is `{python} beta_lev`, with a p-value of `{python} p_lev`. This suggests that leverage has a weaker and less stable relationship with ROA than firm size. While leverage may matter for financial risk and capital structure, it does not appear to explain the main performance pattern in this sample. The central result is therefore driven primarily by firm size.
+The leverage coefficient is small in all models. In the most complete model, the coefficient on leverage is `{python} beta_lev`, with a p-value of `{python} p_lev_text`. This suggests that leverage has a weaker and less stable relationship with ROA than firm size. While leverage may matter for financial risk and capital structure, it does not appear to explain the main performance pattern in this sample. The central result is therefore driven primarily by firm size.
 
 The increase in explanatory power from the baseline model to the industry-control model also matters. The inclusion of industry controls increases the model's ability to account for variation in ROA, which is expected in manufacturing because subsectors differ in asset intensity, production processes and margins. However, the firm-size coefficient remains positive even after these controls are included. This strengthens the interpretation that the positive association between size and performance is not merely a reflection of broad industry differences.
 
